@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Gender Reveal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: #fff;
+      padding: 40px;
+    }
+    h1 {
+      margin-top: 50px;
+    }
+    button {
+      font-size: 20px;
+      padding: 15px 30px;
+      margin-top: 40px;
+      cursor: pointer;
+    }
+    .result {
+      font-size: 40px;
+      margin-top: 50px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>👶 우리 아기의 성별은?</h1>
+  <button onclick="reveal()">확인하기 💖</button>
+
+  <div class="result" id="result">🎀 Girl 🎀</div>
+
+  <script>
+    function reveal() {
+      document.getElementById("result").style.display = "block";
+    }
+  </script>
+
+</body>
+</html>
