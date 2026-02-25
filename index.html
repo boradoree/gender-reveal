@@ -12,7 +12,8 @@
       align-items:center;
       justify-content:center;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background: radial-gradient(circle at top, #ffffff, #fff0f6);
+      /* 🔮 연보라 배경 */
+      background: radial-gradient(circle at top, #ffffff, #f2efff);
       color:#111;
     }
     .card{
@@ -28,7 +29,8 @@
     h1{
       margin:0;
       font-size:32px;
-      color:#ff3b7d;
+      /* 🔮 보라 포인트 */
+      color:#7a6cff;
       font-weight:900;
     }
     .due{
@@ -48,7 +50,8 @@
       border-radius:16px;
       border:0;
       cursor:pointer;
-      background:#ff5aa5;
+      /* 🔮 연보라 버튼 */
+      background:#8b7cff;
       color:#fff;
       font-weight:600;
     }
@@ -61,14 +64,16 @@
       font-weight:900;
       margin-top:18px;
       display:none;
-      color:#ff3b7d;
+      /* 🔮 보라 카운트 */
+      color:#7a6cff;
     }
     .result{
       margin-top:20px;
       font-size:48px;
       font-weight:900;
       display:none;
-      color:#ff3b7d;
+      /* 🔮 결과도 보라 (핑크 아님!) */
+      color:#7a6cff;
     }
 
     /* confetti */
@@ -102,11 +107,11 @@
     <div class="due">출산 예정일 · 2026. 7. 7</div>
 
     <div class="subtitle" id="subtitle">
-      버튼을 누르면 공개돼요 💕
+      버튼을 누르면 공개돼요 💫
     </div>
 
     <button class="btn" id="btn" onclick="startReveal()">
-      확인하기 💖
+      확인하기 ✨
     </button>
 
     <div class="count" id="count">3</div>
@@ -121,7 +126,7 @@
 
     function startReveal(){
       btn.disabled = true;
-      subtitleEl.textContent = "두근두근… 💓";
+      subtitleEl.textContent = "두근두근… 💜";
       countEl.style.display = "block";
       resultEl.style.display = "none";
 
@@ -150,7 +155,8 @@
       const wrap = document.getElementById('confetti');
       wrap.innerHTML = "";
 
-      const colors = ["#ff5aa5", "#ff8ac8", "#ffd1e6", "#ff3b7d"];
+      /* 🔮 보라 컨페티 */
+      const colors = ["#8b7cff", "#a79bff", "#e0dbff", "#6f63ff"];
       const pieces = 150;
 
       for (let i = 0; i < pieces; i++){
