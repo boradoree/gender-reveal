@@ -1,42 +1,171 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <title>Gender Reveal</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>동그라미 Gender Reveal</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      background: #fff;
-      padding: 40px;
+    body{
+      margin:0;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: radial-gradient(circle at top, #ffffff, #fff0f6);
+      color:#111;
     }
-    h1 {
-      margin-top: 50px;
+    .card{
+      width:min(520px, 92vw);
+      background:#fff;
+      border-radius:22px;
+      padding:32px 22px 36px;
+      box-shadow: 0 14px 34px rgba(0,0,0,.1);
+      text-align:center;
+      position:relative;
+      overflow:hidden;
     }
-    button {
-      font-size: 20px;
-      padding: 15px 30px;
-      margin-top: 40px;
-      cursor: pointer;
+    h1{
+      margin:0;
+      font-size:32px;
+      color:#ff3b7d;
+      font-weight:900;
     }
-    .result {
-      font-size: 40px;
-      margin-top: 50px;
-      display: none;
+    .due{
+      margin-top:6px;
+      font-size:15px;
+      color:#777;
+    }
+    .subtitle{
+      margin-top:14px;
+      font-size:16px;
+      color:#444;
+    }
+    .btn{
+      margin-top:26px;
+      font-size:18px;
+      padding:14px 24px;
+      border-radius:16px;
+      border:0;
+      cursor:pointer;
+      background:#ff5aa5;
+      color:#fff;
+      font-weight:600;
+    }
+    .btn:disabled{
+      opacity:.5;
+      cursor:not-allowed;
+    }
+    .count{
+      font-size:58px;
+      font-weight:900;
+      margin-top:18px;
+      display:none;
+      color:#ff3b7d;
+    }
+    .result{
+      margin-top:20px;
+      font-size:48px;
+      font-weight:900;
+      display:none;
+      color:#ff3b7d;
+    }
+
+    /* confetti */
+    .confetti{
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+    }
+    .piece{
+      position:absolute;
+      top:-12px;
+      width:10px;
+      height:18px;
+      opacity:.9;
+      animation: fall linear forwards;
+    }
+    @keyframes fall{
+      to{
+        transform: translateY(110vh) rotate(540deg);
+        opacity:1;
+      }
     }
   </style>
 </head>
 <body>
 
-  <h1>👶 우리 아기의 성별은?</h1>
-  <button onclick="reveal()">확인하기 💖</button>
+  <div class="card">
+    <div class="confetti" id="confetti"></div>
 
-  <div class="result" id="result">🎀 Girl 🎀</div>
+    <h1>👶 동그라미</h1>
+    <div class="due">출산 예정일 · 2026. 7. 7</div>
+
+    <div class="subtitle" id="subtitle">
+      버튼을 누르면 공개돼요 💕
+    </div>
+
+    <button class="btn" id="btn" onclick="startReveal()">
+      확인하기 💖
+    </button>
+
+    <div class="count" id="count">3</div>
+    <div class="result" id="result">🎀 GIRL 🎀</div>
+  </div>
 
   <script>
-    function reveal() {
-      document.getElementById("result").style.display = "block";
+    const btn = document.getElementById('btn');
+    const countEl = document.getElementById('count');
+    const resultEl = document.getElementById('result');
+    const subtitleEl = document.getElementById('subtitle');
+
+    function startReveal(){
+      btn.disabled = true;
+      subtitleEl.textContent = "두근두근… 💓";
+      countEl.style.display = "block";
+      resultEl.style.display = "none";
+
+      let n = 3;
+      countEl.textContent = n;
+
+      const timer = setInterval(() => {
+        n -= 1;
+        if (n === 0){
+          clearInterval(timer);
+          countEl.style.display = "none";
+          reveal();
+        } else {
+          countEl.textContent = n;
+        }
+      }, 700);
+    }
+
+    function reveal(){
+      subtitleEl.textContent = "짜잔! 동그라미는… 💕";
+      resultEl.style.display = "block";
+      launchConfetti();
+    }
+
+    function launchConfetti(){
+      const wrap = document.getElementById('confetti');
+      wrap.innerHTML = "";
+
+      const colors = ["#ff5aa5", "#ff8ac8", "#ffd1e6", "#ff3b7d"];
+      const pieces = 150;
+
+      for (let i = 0; i < pieces; i++){
+        const d = document.createElement('div');
+        d.className = "piece";
+        d.style.left = Math.random() * 100 + "%";
+        d.style.background = colors[Math.floor(Math.random() * colors.length)];
+        d.style.width = (6 + Math.random() * 8) + "px";
+        d.style.height = (10 + Math.random() * 14) + "px";
+        d.style.animationDuration = (900 + Math.random() * 900) + "ms";
+        d.style.animationDelay = (Math.random() * 150) + "ms";
+        wrap.appendChild(d);
+      }
+
+      setTimeout(() => wrap.innerHTML = "", 3000);
     }
   </script>
 
